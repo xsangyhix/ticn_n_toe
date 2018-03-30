@@ -4,6 +4,7 @@ class Arena(object):
         self.fields = [[0 for i in range(size)] for i in range(size)]
         self.last_move = []
         self.win_condition = win_condition
+        self.moves_played = 0
 
     def get_table(self):
         return self.fields
@@ -15,12 +16,14 @@ class Arena(object):
         try:
             check_empty_field = self.fields[position[0]][position[1]] == 0
             check_input_valid_value = sign_type in [1, 2]
-            check_input_in_bounds = self.size > sign_type >= 0
+            check_input_x_in_bounds = self.size > position[0] >= 0
+            check_input_y_in_bounds = self.size > position[1] >= 0
             check_input_value_type = type(sign_type) is int
 
             check_all_checks.append(check_empty_field)
             check_all_checks.append(check_input_valid_value)
-            check_all_checks.append(check_input_in_bounds)
+            check_all_checks.append(check_input_x_in_bounds)
+            check_all_checks.append(check_input_y_in_bounds)
             check_all_checks.append(check_input_value_type)
         except IndexError:
             check_all_checks.append(False)
@@ -28,6 +31,7 @@ class Arena(object):
         if not (False in check_all_checks):
             self.fields[position[0]][position[1]] = sign_type
             self.last_move = position
+            self.moves_played += 1
             return 1
         else:
             print("Invalid input")
@@ -38,6 +42,9 @@ class Arena(object):
             print("No valid move has been played.")
             return 0
         last_input = self.fields[self.last_move[0]][self.last_move[1]]
+
+        if self.moves_played == (self.size * self.size):
+            return 2
 
         # check horizontally
         count = 1

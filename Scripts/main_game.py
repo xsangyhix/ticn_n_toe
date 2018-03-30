@@ -33,9 +33,14 @@ while not win:
     screen.update_arena(play_arena.get_table())
     screen.render()
 
-    if play_arena.check_for_win() == 1:
+    win_check = play_arena.check_for_win()
+
+    if win_check == 1:
         win = True
         print('Player ' + next_player.name + ' won the game!')
+    elif win_check == 2:
+        win = True
+        print("DRAW!")
 
     if next_player is p1:
         next_player = p2
