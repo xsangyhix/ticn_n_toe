@@ -1,1 +1,1 @@
-print(0 < 1 < 0)
+print(False in [False, True, True])
