@@ -43,9 +43,6 @@ class Arena(object):
             return 0
         last_input = self.fields[self.last_move[0]][self.last_move[1]]
 
-        if self.moves_played == (self.size * self.size):
-            return 2
-
         # check horizontally
         count = 1
         y = self.last_move[0]
@@ -115,5 +112,8 @@ class Arena(object):
 
         if count >= self.win_condition:
             return 1
+
+        if self.moves_played == (self.size * self.size):
+            return 2
 
         return 0
