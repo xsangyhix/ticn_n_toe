@@ -7,6 +7,7 @@ screen = scrn.Screen()
 
 arena_size = int(input('Please enter the size of the play arena: '))
 win_condition = int(input('Please enter the required sequence length to win: '))
+
 play_arena = arena.Arena(arena_size, win_condition)
 win = False
 
@@ -23,12 +24,21 @@ next_player = p1
 
 while not win:
     print('Player ' + next_player.name + ' please enter your move:')
-    mx = int(input('Column: ')) - 1
-    my = int(input('Row: ')) - 1
 
-    while play_arena.put_sign(next_player.number, [my, mx]) == 0:
+    try:
         mx = int(input('Column: ')) - 1
         my = int(input('Row: ')) - 1
+    except ValueError:
+        my = -1
+        mx = -1
+
+    while play_arena.put_sign(next_player.number, [my, mx]) == 0:
+        try:
+            mx = int(input('Column: ')) - 1
+            my = int(input('Row: ')) - 1
+        except ValueError:
+            my = -1
+            mx = -1
 
     screen.update_arena(play_arena.get_table())
     screen.render()
