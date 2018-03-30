@@ -80,8 +80,8 @@ class Arena(object):
             y += 1
             x -= 1
 
-        y = self.last_move[0] + 1
-        x = self.last_move[1] - 1
+        y = self.last_move[0] - 1
+        x = self.last_move[1] + 1
         while y >= 0 and x < self.size and self.fields[y][x] == last_input:
             count += 1
             y -= 1
@@ -100,7 +100,7 @@ class Arena(object):
             x -= 1
 
         y = self.last_move[0] + 1
-        x = self.last_move[1] - 1
+        x = self.last_move[1] + 1
         while y < self.size and x < self.size and self.fields[y][x] == last_input:
             count += 1
             y += 1
